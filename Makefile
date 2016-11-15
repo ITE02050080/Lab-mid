@@ -1,10 +1,20 @@
-server: server.o 
-	gcc -pthread  server.o -o server
+all: server client doprocessing.o
+
+server: server.o doprocessing.o
+	gcc -o server server.o doprocessing.o
+
 server.o: server.c
-	gcc -pthread -c server.c
+	gcc -c server.c
+
 client: client.o
-	gcc -pthread client.o -o client
+	gcc -o client client.o
+
 client.o: client.c
-	gcc -pthread -c client.c
+	gcc -c client.c
+
+doprocessing.o: doprocessing.c
+	gcc -c doprocessing.c
+
 clean:
-	rm server.o client.o
+	rm *.o client server
+	
